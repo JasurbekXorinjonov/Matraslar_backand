@@ -12,9 +12,12 @@ import {
 import React, { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ConfirmDialog from "./ConfirmDialog";
 
 const Maxsulotlar = ({ token }) => {
   const [products, setProducts] = useState([]);
+  const [deletedId, setDeletedId] = useState(null);
+  const [deletedModal, setDeletedModal] = useState(false);
 
   useEffect(() => {
     getList();
@@ -24,21 +27,37 @@ const Maxsulotlar = ({ token }) => {
     fetch("http://localhost:1212/admin/products", {
       headers: {
         Authorization: token,
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((data) => setProducts(data.products));
   };
 
+  const deletedCategory = () => {
+    fetch(`http://localhost:1212/admin/products/${deletedId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        setProducts(products.filter((item) => item.id !== deletedId));
+        setDeletedModal(false);
+      });
+  };
+
+  const deletedClick = (id) => {
+    setDeletedId(id);
+    setDeletedModal(true);
+  };
+
   console.log(products);
 
   return (
-    <Stack
-      direction={"column"}
-      sx={{ padding: "15px" }}
-      direction={"column"}
-      alignItems={"end"}
-      spacing={14}>
+    <Stack direction={"column"} sx={{ padding: "15px" }} alignItems={"end"} spacing={14}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{ backgroundColor: "#01384D" }}>
@@ -77,7 +96,7 @@ const Maxsulotlar = ({ token }) => {
                   <Button variant="contained" color="inherit" sx={{ marginRight: "10px" }}>
                     <EditIcon />
                   </Button>
-                  <Button variant="contained" color="inherit">
+                  <Button variant="contained" color="inherit" onClick={() => deletedClick(item.id)}>
                     <DeleteIcon />
                   </Button>
                 </TableCell>
@@ -86,6 +105,10 @@ const Maxsulotlar = ({ token }) => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {deletedModal && (
+        <ConfirmDialog onCancel={() => setDeletedModal(false)} onConfirm={deletedCategory} />
+      )}
 
       <Button variant="contained" color="primary">
         Qo'shish

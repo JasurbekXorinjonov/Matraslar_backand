@@ -115,10 +115,6 @@ function Toifalar({ token }) {
         />
       )}
 
-      {/* {editIndex && (
-        <UpdateCategory token={token} onClose={() => setEditIndex(false)} saveEdit={saveEdit} />
-      )} */}
-
       <Button sx={{ width: "150px" }} variant="contained" color="primary" onClick={() => addItem()}>
         Qo'shish
       </Button>

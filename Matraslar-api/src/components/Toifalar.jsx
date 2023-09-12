@@ -14,8 +14,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import UpsertCategory from "./UpsertCategory";
 import ConfirmDialog from "./ConfirmDialog";
-import { Update } from "@mui/icons-material";
-import UpdateCategory from "./UpdateCategory";
 
 function Toifalar({ token }) {
   const [toifalar, setToifalar] = useState([]);

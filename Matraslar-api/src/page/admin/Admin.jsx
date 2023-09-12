@@ -42,7 +42,7 @@ function Admin({ token }) {
             <Route exact path="buyurtmalar" element={<Buyurtmalar token={token} />} />
             <Route exact path="admin/customers" element={<Customers token={token} />} />
             <Route exact path="admin/toifalar" element={<Toifalar token={token} />} />
-            <Route exact path="admin/maxsulotlar" element={<Maxsulotlar />} />
+            <Route exact path="admin/maxsulotlar" element={<Maxsulotlar token={token} />} />
             <Route exact path="admin/texnologiyalar" element={<Texnologiyalar token={token} />} />
             <Route exact path="admin/manzil" element={<Manzil />} />
           </Routes>

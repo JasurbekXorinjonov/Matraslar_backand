@@ -13,7 +13,7 @@ const ModalContent = styled("div")({
   textAlign: "center",
 });
 
-function AddBtn({ token, item, ...props }) {
+function upsertCategory({ token, item, ...props }) {
   const form = useRef({ category: "" });
   console.log("form", form);
   const create = () => {
@@ -81,4 +81,4 @@ function AddBtn({ token, item, ...props }) {
   );
 }
 
-export default AddBtn;
+export default upsertCategory;

@@ -13,11 +13,14 @@ import React, { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ConfirmDialog from "./ConfirmDialog";
+import UpdateProduct from "./UpdateProduct";
 
 const Maxsulotlar = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [deletedId, setDeletedId] = useState(null);
   const [deletedModal, setDeletedModal] = useState(false);
+  const [updatedModal, setUpdatedModal] = useState(false);
+  const [selected, setSelected] = useState({});
 
   useEffect(() => {
     getList();
@@ -52,6 +55,11 @@ const Maxsulotlar = ({ token }) => {
   const deletedClick = (id) => {
     setDeletedId(id);
     setDeletedModal(true);
+  };
+
+  const update = () => {
+    setUpdatedModal(true);
+    setSelected({});
   };
 
   console.log(products);
@@ -110,7 +118,9 @@ const Maxsulotlar = ({ token }) => {
         <ConfirmDialog onCancel={() => setDeletedModal(false)} onConfirm={deletedCategory} />
       )}
 
-      <Button variant="contained" color="primary">
+      {updatedModal && <UpdateProduct token={token} item={selected} />}
+
+      <Button variant="contained" color="primary" onClick={() => update()}>
         Qo'shish
       </Button>
     </Stack>

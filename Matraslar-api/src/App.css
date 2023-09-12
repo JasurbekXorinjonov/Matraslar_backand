@@ -10,3 +10,11 @@ th {
   padding: 20px;
   text-align: center;
 }
+input,
+select,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 220px;
+}
